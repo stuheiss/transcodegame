@@ -5,6 +5,21 @@ import Types exposing (..)
 import Dict
 
 
+maybeOneOf : List (Maybe a) -> Maybe a
+maybeOneOf maybes =
+    case maybes of
+        [] ->
+            Nothing
+
+        maybe :: rest ->
+            case maybe of
+                Nothing ->
+                    maybeOneOf rest
+
+                Just _ ->
+                    maybe
+
+
 handleCommand : Command -> Model -> ( Model, Maybe String )
 handleCommand command model =
     case command of
@@ -97,7 +112,7 @@ handleCommand command model =
                     handleCommand (Examine object) model
 
         Use object otherObject ->
-            Maybe.oneOf
+            maybeOneOf
                 [ handleUse object otherObject model
                 , handleUse otherObject object model
                 ]
@@ -245,6 +260,85 @@ nameOf obj =
 
         ThePlayer ->
             "Myself"
+
+
+objectToString : Object -> String
+objectToString obj =
+    case obj of
+        BlackBiro ->
+            "BlackBiro"
+
+        Chicken ->
+            "Chicken"
+
+        Cinzano ->
+            "Cinzano"
+
+        Fridge ->
+            "Fridge"
+
+        FridgeEmpty ->
+            "FridgeEmpty"
+
+        Lighter ->
+            "Lighter"
+
+        Molotov ->
+            "Molotov"
+
+        MolotovLit ->
+            "MolotovLit"
+
+        Package ->
+            "Package"
+
+        Paperwork ->
+            "Paperwork"
+
+        PaperworkDone ->
+            "PaperworkDone"
+
+        Parcel ->
+            "Parcel"
+
+        Postbox ->
+            "Postbox"
+
+        PotatoSackEmpty ->
+            "PotatoSackEmpty"
+
+        PotatoSackFull ->
+            "PotatoSackFull"
+
+        Rag ->
+            "Rag"
+
+        Shed ->
+            "Shed"
+
+        Stamps ->
+            "Stamps"
+
+        Still ->
+            "Still"
+
+        UselessVaseEmpty ->
+            "UselessVaseEmpty"
+
+        UselessVaseFull ->
+            "UselessVaseFull"
+
+        WheelbarrowBroken ->
+            "WheelbarrowBroken"
+
+        WheelbarrowFixed ->
+            "WheelbarrowFixed"
+
+        WheelbarrowFull ->
+            "WheelbarrowFull"
+
+        ThePlayer ->
+            "ThePlayer"
 
 
 examine : Object -> String

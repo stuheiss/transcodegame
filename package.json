@@ -1,0 +1,27 @@
+{
+  "name": "transcodegame",
+  "version": "1.0.0",
+  "description": "A point & click adventure written by Elm by [Iris Ward][iris], [Dragon Burgers][dragon], [Jo Pearce][jo] and [Kris Jenkins][kris], for a [Trans*Code][transcode] hack day.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "elm": "^0.19.1-3",
+    "elm-format": "^0.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krisajenkins/transcodegame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krisajenkins/transcodegame/issues"
+  },
+  "homepage": "https://github.com/krisajenkins/transcodegame#readme"
+}

@@ -7,11 +7,26 @@ import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import Svg.Events exposing (..)
 import Types exposing (..)
+import Narrative exposing (objectToString)
+import String exposing (String)
 
 
 tileSize : Int
 tileSize =
     45
+
+
+fst : ( a, b ) -> a
+fst (a, b) = a
+
+
+snd : ( a, b ) -> b
+snd (a, b) = b
+
+
+uncurry : (a -> b -> c) -> ( a, b ) -> c
+uncurry f ( a, b ) =
+    f a b
 
 
 root : Model -> Html Msg
@@ -47,22 +62,22 @@ tile position cell =
                     )
 
                 Thing ThePlayer ->
-                    ( (patternDefs (toString ThePlayer))
+                    ( (patternDefs (objectToString ThePlayer))
                     , [ stroke "#8504da", fill "url(#ThePlayer)" ]
                     , Just (InteractAt position (Thing ThePlayer))
                     )
 
                 Thing object ->
-                    ( (patternDefs (toString object))
-                    , [ stroke "black", fill ("url(#" ++ toString object ++ ")") ]
+                    ( (patternDefs (objectToString object))
+                    , [ stroke "black", fill ("url(#" ++ (objectToString object) ++ ")") ]
                     , Just (InteractAt position (Thing object))
                     )
     in
         g []
             [ preamble
             , rect
-                ([ x (toString (fst position * tileSize))
-                 , y (toString (snd position * tileSize))
+                ([ x (String.fromInt (fst position * tileSize))
+                 , y (String.fromInt (snd position * tileSize))
                  , width (px tileSize)
                  , height (px tileSize)
                  ]
@@ -90,7 +105,7 @@ patternDefs objectName =
             , height (px tileSize)
             ]
             [ image
-                [ xlinkHref ("images/" ++ objectName ++ ".png")
+                [ xlinkHref ("../static/images/" ++ objectName ++ ".png")
                 , x (px 0)
                 , y (px 0)
                 , width (px tileSize)

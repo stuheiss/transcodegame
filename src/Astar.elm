@@ -21,6 +21,14 @@ type alias Model =
     }
 
 
+fst : ( a, b ) -> a
+fst (a, b) = a
+
+
+snd : ( a, b ) -> b
+snd (a, b) = b
+
+
 initialModel : Position -> Model
 initialModel start =
     { evaluated = Set.empty

@@ -4,7 +4,7 @@ import Common.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Narrative
+import Narrative exposing (nameOf)
 import Types exposing (..)
 import View.Svg
 
@@ -13,25 +13,19 @@ root : Model -> Html Msg
 root model =
     div
         [ id "main-content"
-        , style
-            [ ( "width", (px (19 * View.Svg.tileSize)) )
-            , ( "height", (px (12 * View.Svg.tileSize)) )
-            , ( "margin", "0 auto" )
-            ]
+        , style "width" (px (19 * View.Svg.tileSize))
+        , style "height" (px (12 * View.Svg.tileSize))
+        , style "margin" "0 auto"
         ]
         [ div
-            [ style
-                [ ( "perspective", px 1000 )
-                , ( "margin-top", px -50 )
-                , ( "text-align", "center" )
-                ]
+            [ style "perspective" (px 1000)
+            , style "margin-top" (px -50)
+            , style "text-align" "center"
             ]
             [ div
-                [ style
-                    [ ( "transform", "rotate3d(1,0,0,35deg)" )
-                    , ( "width", pct 100 )
-                    , ( "height", pct 100 )
-                    ]
+                [ style "transform" "rotate3d(1,0,0,35deg)"
+                , style "width" (pct 100)
+                , style "height" (pct 100)
                 ]
                 [ View.Svg.root model ]
             ]
@@ -63,9 +57,9 @@ inventoryObjectView object =
     button
         [ class "btn btn.info inventory-button"
         , onClick (PlayerCommand (Interact (Thing object)))
-        , style [ ( "background-image", "url(images/" ++ toString object ++ ".png" ) ]
+        , style "background-image" ("url(images/" ++ nameOf object ++ ".png")
         ]
-        [ text (toString object) ]
+        [ text (nameOf object) ]
 
 
 partialCommandView : Maybe PartialCommand -> Html msg

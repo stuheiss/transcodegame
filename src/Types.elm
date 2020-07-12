@@ -2,7 +2,7 @@ module Types exposing (..)
 
 import Dict exposing (Dict)
 import Set exposing (Set)
-import Time exposing (Time)
+import Time018 as Time exposing (Time)
 
 
 type alias Position =
@@ -83,6 +83,10 @@ type alias Model =
     , timeSinceLastMove : Maybe Time
     }
 
+
+flip : (a -> b -> c) -> (b -> a -> c)
+flip f b a =
+    f a b
 
 canStandOn : Maybe Cell -> Bool
 canStandOn cell =

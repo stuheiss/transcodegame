@@ -4,7 +4,7 @@ import Array
 import Astar
 import Dict
 import Narrative exposing (..)
-import Time exposing (Time)
+import Time018 as Time exposing (Time)
 import Types exposing (..)
 
 
@@ -42,10 +42,10 @@ initialWorld =
             ( 17, 10 )
 
         xRange =
-            [minX..maxX]
+            List.range minX maxX
 
         yRange =
-            [minY..maxY]
+            List.range minY maxY
     in
         (List.concat
             [ List.concatMap
@@ -58,13 +58,13 @@ initialWorld =
             , verticalWall maxX yRange
             , horizontalWall xRange minY
             , horizontalWall xRange maxY
-            , verticalWall 5 [1..4]
-            , horizontalWall [5..8] 4
-            , verticalWall 12 [1..3]
-            , horizontalWall [5..8] 6
-            , verticalWall 5 [6..9]
-            , horizontalWall [10..12] 6
-            , verticalWall 12 [5..9]
+            , verticalWall 5 (List.range 1 4)
+            , horizontalWall (List.range 5 8) 4
+            , verticalWall 12 (List.range 1 3)
+            , horizontalWall (List.range 5 8) 6
+            , verticalWall 5 (List.range 6 9)
+            , horizontalWall (List.range 10 12) 6
+            , verticalWall 12 (List.range 5 9)
             , [ ( ( 8, 1 ), Block ) ]
             , [ ( ( 8, 3 ), Block ) ]
             , [ ( ( 16, 5 ), Thing Shed ) ]
@@ -82,8 +82,8 @@ initialWorld =
             |> Dict.fromList
 
 
-initialState : ( Model, Cmd Msg )
-initialState =
+initialState : () -> ( Model, Cmd Msg )
+initialState _ =
     ( { world = initialWorld
       , dialogue = Just "Well, I guess I'd better look around..."
       , partialCommand = Nothing
